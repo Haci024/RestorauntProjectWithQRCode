@@ -9,6 +9,7 @@ namespace Business.Services
 {
     public interface ICategoryService:IGenericService<Category>
     {
-
+       
+        
     }
 }

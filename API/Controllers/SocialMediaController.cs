@@ -25,7 +25,7 @@ namespace API.Controllers
             var value = _mapper.Map<List<ResultSocialMediaDTO>>(_service.GetList());
             return Ok(value);
         }
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{Id}")]
         public IActionResult GetSocialMedia(int Id)
         {
             var value = _mapper.Map<GetSocialMediaDTO>(_service.GetById(Id));
@@ -43,7 +43,7 @@ namespace API.Controllers
             });
             return Ok("Social Media added sucessfully!");
         }
-        [HttpPut("Update")]
+        [HttpPut("Update/{Id}")]
         public IActionResult UpdateSocialMedia(UpdateSocialMediaDTO dto)
         {
             _service.Create(new SocialMedia()
@@ -53,7 +53,7 @@ namespace API.Controllers
             });
             return Ok("Social Media updatated Succesfully!");
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{Id}")]
         public IActionResult DeleteSocialMedia(int Id)
         {
             var value=_service.GetById(Id);

@@ -28,7 +28,7 @@ namespace API.Controllers
           var values=_mapper.Map<List<ResultTestimonialDTO>>(_service.GetList());
             return Ok(values);    
         }
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{Id}")]
         public IActionResult GetTestimonial(int id)
         {
             var values = _mapper.Map<GetTestimonialDTO>(_service.GetById(id));
@@ -37,39 +37,24 @@ namespace API.Controllers
         [HttpPost("Create")]
         public IActionResult CreateTestimonial(AddTestimonialDTO dto)
         {
-            _service.Create(new Testimonial()
-            {
-                Id = dto.Id,
-                Title = dto.Title,
-                Name = dto.Name,
-                Comment = dto.Comment,
-                ImageUrl = dto.ImageUrl,
-                Status = dto.Status,
-
-            });
-
+         Testimonial entity=new Testimonial();
+          
+            _mapper.Map(dto, entity);
+            _service.Create(entity);
 
             return Ok("Əlavə edildi!");
         }
         [HttpPut("Update")]
         public IActionResult UpdateTestimonial(UpdateTestimonialDTO dto)
         {
-            _service.Update(new Testimonial()
-            {
-           Id=dto.Id,
-           Title=dto.Title,
-           Name=dto.Name,
-           Comment=dto.Comment,
-           ImageUrl=dto.ImageUrl,
-           Status=dto.Status,   
-
-
-            });
+            var entity=_service.GetById(dto.Id);
            
+            _mapper.Map(dto, entity);
+            _service.Update(entity);
 
             return Ok("Məlumatlar yeniləndi!");
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{Id}")]
         public IActionResult DeleteTestimonial(int  Id)
         {
             var values = _service.GetById(Id);

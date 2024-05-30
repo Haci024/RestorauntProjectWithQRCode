@@ -10,5 +10,6 @@ namespace Business.Service
 {
     public interface ITestimonialService:IGenericService<Testimonial>
     {
+
     }
 }

@@ -8,9 +8,9 @@ namespace DTO.DTOS.AboutDTO
 {
     public class AboutUsUpdateDTO
     {
-        public int Id { get; set; }
+		public int Id { get; set; }
 
-        public string ImageUrl { get; set; }
+		public string ImageUrl { get; set; }
 
         public string Title { get; set; }
 

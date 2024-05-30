@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Service;
 using DTO.DTOS.AboutDTO;
+using DTO.DTOS.CategoryDTO;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,53 +21,41 @@ namespace API.Controllers
             _mapper = mapper;
 
         }
-        [HttpGet("List")]
-        public IActionResult AboutList()
+        //[HttpGet("List")]
+        //public IActionResult AboutList()
+        //{
+        //  var values=_mapper.Map<List<AboutUsResultDTO>>(_service.GetList());
+        //    return Ok(values);    
+        //}
+        [HttpGet("GetById/{Id}")]
+        public IActionResult GetAboutUs(int Id)
         {
-          var values=_mapper.Map<List<AboutUsResultDTO>>(_service.GetList());
-            return Ok(values);    
-        }
-        [HttpGet("GetById")]
-        public IActionResult GetAboutUs(int id)
-        {
-            var values = _mapper.Map<AboutUsGetDTO>(_service.GetById(id));
+            if (Id == null)
+            {
+                return NotFound("Haqqımızda səhifəsi tapılmadı!");
+            }
+            var values = _mapper.Map<AboutUsGetDTO>(_service.GetById(Id));
+            
             return Ok(values);
         }
-        [HttpPost("Create")]
-        public IActionResult CreateAboutUs(AboutUsCreateDTO dto)
+   
+        [HttpPut("Update/{Id}")]
+        public IActionResult UpdateAboutUs(int Id,AboutUsUpdateDTO dto)
         {
-            _service.Create(new AboutUs()
-            {
-                ImageUrl = dto.ImageUrl,
-                Title = dto.Title,
-                Description = dto.Description,
-                Id= dto.Id,
-            });
-
-            return Ok("Əlavə edildi!");
-        }
-        [HttpPut("Update")]
-        public IActionResult UpdateAboutUs(AboutUsUpdateDTO dto)
-        {
-            _service.Update(new AboutUs()
-            {
-              ImageUrl= dto.ImageUrl,
-                Title= dto.Title,
-                Description= dto.Description,
-
-
-            });
+            var entity = _service.GetById(Id);
            
+            _mapper.Map(dto,entity);
+            _service.Update(entity);
 
             return Ok("Məlumatlar yeniləndi!");
         }
-        [HttpDelete("Delete")]
-        public IActionResult UpdateAboutUs(int  Id)
-        {
-            var values = _service.GetById(Id);
-            _service.Delete(values);
+        //[HttpDelete("Delete")]
+        //public IActionResult DeleteAboutUs(int  Id)
+        //{
+        //    var values = _service.GetById(Id);
+        //    _service.Delete(values);
 
-            return Ok("Silmə əməliyyatı uğurludur!");
-        }
+        //    return Ok("Silmə əməliyyatı uğurludur!");
+        //}
     }
 }

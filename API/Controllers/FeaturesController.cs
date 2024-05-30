@@ -27,10 +27,10 @@ namespace API.Controllers
           var values=_mapper.Map<List<ResultFeaturesDTO>>(_service.GetList());
             return Ok(values);    
         }
-        [HttpGet("GetById")]
-        public IActionResult GetFeatures(int id)
+        [HttpGet("GetById/{Id}")]
+        public IActionResult GetFeatures(int Id)
         {
-            var values = _mapper.Map<GetFeaturesDTO>(_service.GetById(id));
+            var values = _mapper.Map<GetFeaturesDTO>(_service.GetById(Id));
             return Ok(values);
         }
         [HttpPost("Create")]
@@ -46,7 +46,7 @@ namespace API.Controllers
 
             return Ok("Əlavə edildi!");
         }
-        [HttpPut("Update")]
+        [HttpPut("Update/{Id}")]
         public IActionResult UpdateFeatures(UpdateFeaturesDTO dto)
         {
             _service.Update(new Features()
@@ -61,7 +61,7 @@ namespace API.Controllers
 
             return Ok("Məlumatlar yeniləndi!");
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{Id}")]
         public IActionResult DeleteFeatures(int  Id)
         {
             var values = _service.GetById(Id);

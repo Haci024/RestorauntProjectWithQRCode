@@ -8,7 +8,7 @@ namespace DTO.DTOS.ProductDTO
 {
     public class UpdateProductDTO
     {
-        public int Id { get; set; }
+       
 
         public string Name { get; set; }
 

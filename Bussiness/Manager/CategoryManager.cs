@@ -37,7 +37,8 @@ namespace Business.Manager
         {
             return _dal.GetList();
         }
-
+        
+      
         public void Update(Category entity)
         {
             _dal.Update(entity);

@@ -28,57 +28,47 @@ namespace API.Controllers
           var values=_mapper.Map<List<ResultProductDTO>>(_service.GetList());
             return Ok(values);    
         }
-        [HttpGet("GetById")]
-        public IActionResult GetProduct(int id)
+        [HttpGet("GetById/{Id}")]
+        public IActionResult GetProduct(int Id)
         {
-            var values = _mapper.Map<GetProductDTO>(_service.GetById(id));
+            var values = _mapper.Map<GetProductDTO>(_service.GetById(Id));
             return Ok(values);
         }
         [HttpPost("Create")]
         public IActionResult CreateProduct(AddProductDTO dto)
         {
-            _service.Create(new Products()
-            {
-                Id=dto.Id,
-                CategoryId = dto.CategoryId,
-                Name = dto.Name,
-                Description=dto.description,
-                Status= dto.Status,
-                Image=dto.Image,
-                
-
-                
-            });
-
+            var entity = new Products();
+            _mapper.Map(dto,entity);
+            _service.Create(entity);
 
             return Ok("Məhsul əlavə edildi!");
         }
-        [HttpPut("Update")]
-        public IActionResult UpdateProduct(int id,UpdateProductDTO dto)
+        [HttpPut("Update/{Id}")]
+        public IActionResult UpdateProduct(int Id,UpdateProductDTO dto)
         {
-            var value = _service.GetById(id);
-            
-
-            value.Id = dto.Id;
-            value.CategoryId = dto.CategoryId;
-            value.Name = dto.Name;
-            value.Image = dto.Image;
-            value.Description = dto.description;
-            value.Status = dto.Status;
-
+            var value = _service.GetById(Id);
+           _mapper.Map(dto,value);
             _service.Update(value);
-
-
 
             return Ok("Məhsul məlumatları yeniləndi!");
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{Id}")]
         public IActionResult DeleteProduct(int  Id)
         {
+
             var values = _service.GetById(Id);
             _service.Delete(values);
 
             return Ok("Məhsul uğurla silindi!");
+        }
+
+        [HttpGet("ProductListByCategory/{CategoryId}")]
+        public IActionResult ProductListByCategory(int CategoryId)
+        {
+            var values = _mapper.Map<GetProductDTO>(_service.ProductListByCategory(CategoryId));
+
+
+            return Ok(values);
         }
     }
 }

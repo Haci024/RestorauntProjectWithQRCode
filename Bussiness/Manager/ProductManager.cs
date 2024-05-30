@@ -40,5 +40,10 @@ namespace Business.Manager
         {
             _dal.Update(entity);
         }
+        public ICollection<Products> ProductListByCategory(int categoryId)
+        {
+
+           return _dal.ProductListByCategory(categoryId);
+        }
     }
 }

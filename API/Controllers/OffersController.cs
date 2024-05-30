@@ -27,7 +27,7 @@ namespace API.Controllers
           var values=_mapper.Map<List<ResultOffersDTO>>(_service.GetList());
             return Ok(values);    
         }
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{Id}")]
         public IActionResult GetAboutUs(int id)
         {
             var values = _mapper.Map<GetOffersDTO>(_service.GetById(id));
@@ -36,36 +36,22 @@ namespace API.Controllers
         [HttpPost("Create")]
         public IActionResult CreateOffers(AddOffersDTO dto)
         {
-            _service.Create(new Offers()
-            {
-                Description = dto.Description,
-                Image=dto.Image,
-                Name=dto.Name,
-                rate=dto.rate,
-
-                Id= dto.Id,
-            });
-
-
+          Offers entity=new();
+            _mapper.Map(dto,entity);
+            _service.Create(entity);
+            
             return Ok("Əlavə edildi!");
         }
-        [HttpPut("Update")]
-        public IActionResult UpdateAboutUs(UpdateOffersDTO dto)
+        [HttpPut("Update/{Id}")]
+        public IActionResult Update(int Id,UpdateOffersDTO dto)
         {
-            _service.Update(new Offers()
-            {
-                Description = dto.Description,
-                Image = dto.Image,
-                Name = dto.Name,
-                rate = dto.rate,
-                Id = dto.Id,
-            });
+            var entity = _service.GetById(Id);
+            _mapper.Map(dto,entity);
            
-
             return Ok("Məlumatlar yeniləndi!");
         }
-        [HttpDelete("Delete")]
-        public IActionResult UpdateAboutUs(int  Id)
+        [HttpDelete("Delete/{Id}")]
+        public IActionResult Delete(int  Id)
         {
             var values = _service.GetById(Id);
             _service.Delete(values);

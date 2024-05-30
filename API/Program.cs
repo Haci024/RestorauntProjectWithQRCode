@@ -1,3 +1,4 @@
+using API.AutoMapper;
 using Business.Manager;
 using Business.Service;
 using Business.Services;
@@ -5,7 +6,6 @@ using DAL.Abstract;
 using DAL.Concrete;
 using DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,13 +13,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+builder.Services.AddAutoMapper(typeof(CategoryMapper));
+builder.Services.AddAutoMapper(typeof(FeaturesMapper));
+builder.Services.AddAutoMapper(typeof(OfferRepository));
+builder.Services.AddAutoMapper(typeof(ProductMapper));
+builder.Services.AddAutoMapper(typeof(ContactUsMapper));
+builder.Services.AddAutoMapper(typeof(ReservationMapper));
+builder.Services.AddAutoMapper(typeof(SocialMediaMapper));
+builder.Services.AddAutoMapper(typeof(TestimonialMapper));
+builder.Services.AddAutoMapper(typeof(AboutUsMapper));
 builder.Services.AddScoped<IAboutUsService,AboutUsManager>();
 builder.Services.AddScoped<IAboutDAL, AboutUsRepository>();
 

@@ -28,10 +28,10 @@ namespace API.Controllers
           var values=_mapper.Map<List<ResultReservationDTO>>(_service.GetList());
             return Ok(values);    
         }
-        [HttpGet("GetById")]
-        public IActionResult GetReservation(int id)
+        [HttpGet("GetById/{Id}")]
+        public IActionResult GetReservation(int Id)
         {
-            var values = _mapper.Map<GetReservationDTO>(_service.GetById(id));
+            var values = _mapper.Map<GetReservationDTO>(_service.GetById(Id));
             return Ok(values);
         }
         [HttpPost("Create")]
@@ -51,23 +51,17 @@ namespace API.Controllers
 
             return Ok("Əlavə edildi!");
         }
-        [HttpPut("Update")]
-        public IActionResult UpdateReservation(UpdateReservationDTO dto)
+        [HttpPut("Update/{Id}")]
+        public IActionResult UpdateReservation(int Id,UpdateReservationDTO dto)
         {
-            _service.Update(new Reservation()
-            {
-                Date = dto.Date,
-                Email = dto.Email,
-                Name = dto.Name,
-                Id = dto.Id,
-                PersonCount = dto.PersonCount,
-                PhoneNumber = dto.PhoneNumber
-            });
+            var entity=_service.GetById(Id);
+            _mapper.Map(dto, entity);
+          _service.Update(entity);
            
 
             return Ok("Məlumatlar yeniləndi!");
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{Id}")]
         public IActionResult DeleteReservation(int  Id)
         {
             var values = _service.GetById(Id);

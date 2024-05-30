@@ -20,44 +20,52 @@ namespace API.Controllers
             _mapper=mapper;
             
         }
-        [HttpGet("List")]
-        public IActionResult AboutList()
+        [HttpGet("CategoryList")]
+        public IActionResult CategoryList()
         {
             var values = _mapper.Map<List<ResultCategoryDTO>>(_categoryService.GetList());
             return Ok(values);
         }
-        [HttpGet("/GetById/{Id}")]
-        public IActionResult GetAboutUs(int id)
+        [HttpGet("GetById/{Id}")]
+        public IActionResult GetById(int Id)
         {
-            var values = _mapper.Map<GetCategoryDTO>(_categoryService.GetById(id));
+            var values = _mapper.Map<GetCategoryDTO>(_categoryService.GetById(Id));
             return Ok(values);
         }
         [HttpPost("Create")]
-        public IActionResult CreateAboutUs(AddCategoryDTO dto)
+        public IActionResult CreateCategory(AddCategoryDTO dto)
         {
-            _categoryService.Create(new Category()
-            {
-                Name = dto.Name,
-                Status = dto.Status,
-                Id = dto.Id,
-            });
+            var entity= new Category();
+            _mapper.Map(dto,entity);
+            _categoryService.Create(entity);
             return Ok("Əlavə edildi!");
         }
         [HttpPut("Update")]
-        public IActionResult UpdateAboutUs(Category entity)
+        public IActionResult UpdateCategory(UpdateCategoryDTO dto)
         {
+            if (dto.Id==null)
+            {
 
+                return NotFound("Bu məhsul bazada mövcud deyil");
+            }
+            var entity = _categoryService.GetById(dto.Id);
+            if (entity==null)
+            {
+                return NotFound("Xəta baş verdi");
+            }
+            _mapper.Map(dto,entity);
+            _categoryService.Update(entity);
 
-
-            return Ok();
+            return Ok(entity);
         }
-        [HttpDelete("Delete")]
-        public IActionResult UpdateAboutUs(int Id)
+        [HttpDelete("Delete/{Id}")]
+        public IActionResult DeleteCategroy(int Id)
         {
-            var values = _categoryService.GetById(Id);
-            _categoryService.Delete(values);
+            var entity = _categoryService.GetById(Id);
+            _categoryService.Delete(entity);
 
             return Ok("Silmə əməliyyatı uğurludur!");
         }
+       
     }
 }
