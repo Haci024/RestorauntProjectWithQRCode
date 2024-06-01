@@ -12,6 +12,6 @@ namespace Business.Services
        public void Update(T entity);
        public void Delete(T entity);
        public T GetById(int id);
-      public  List<T> GetList();
+      public  IEnumerable<T> GetList();
     }
 }

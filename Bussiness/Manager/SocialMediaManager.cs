@@ -31,7 +31,7 @@ namespace Business.Manager
             return _dal.GetById(id);
         }
 
-        public List<SocialMedia> GetList()
+        public IEnumerable<SocialMedia> GetList()
         {
             return _dal.GetList();
         }

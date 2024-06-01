@@ -2,6 +2,8 @@
 using Business.Services;
 using DTO.DTOS.AboutDTO;
 using DTO.DTOS.CategoryDTO;
+using DTO.DTOS.DashboardDTO;
+using DTO.DTOS.ProductDTO;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,12 @@ namespace API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
-        public CategoryController(ICategoryService categoryService,IMapper mapper)
+        public CategoryController(ICategoryService categoryService,IMapper mapper,IProductService productService)
         {
             _categoryService=categoryService;
+            _productService=productService;
             _mapper=mapper;
             
         }
@@ -66,6 +70,7 @@ namespace API.Controllers
 
             return Ok("Silmə əməliyyatı uğurludur!");
         }
+      
        
     }
 }

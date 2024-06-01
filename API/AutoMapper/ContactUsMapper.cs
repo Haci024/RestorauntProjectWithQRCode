@@ -9,7 +9,7 @@ namespace API.AutoMapper
     {
         public ContactUsMapper()
         {
-            CreateMap<ContactUs, UpdateContactUsDTO>().ReverseMap();
+            CreateMap<ContactUs, ResultContactUsDTO>().ReverseMap();
             CreateMap<ContactUs, UpdateContactUsDTO>().ReverseMap();
             CreateMap<ContactUs, GetContactUsDTO>().ReverseMap();
             CreateMap<ContactUs, AddContactUsDTO>().ReverseMap();

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO.DTOS.ProductDTO
+namespace UI.Areas.Admin.DTOS.ProductDTO
 {
-    public class AddProductDTO
+    public class UpdateProductDTO
     {
-        public int Id { get; set; }
+       
 
         public string Name { get; set; }
 
@@ -16,8 +16,10 @@ namespace DTO.DTOS.ProductDTO
 
         public string description { get; set; }
 
+        public IFormFile Photo { get; set; }    
+
         public string Image { get; set; }
 
-        public bool Status { get; set; } = true;
+        public bool Status { get; set; }
     }
 }

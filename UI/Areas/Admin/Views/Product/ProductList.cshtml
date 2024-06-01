@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ProductListDTO>
+@{
+	ViewData["Title"] = "ProductList";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int num = 0;
+}
+
+<div class="wrapper">
+
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">Yemək Kateqoriyaları</div>
+								<div class="text-lg-right container">
+									<a asp-action="AddProduct" style="color:white" class="btn btn-success">Yeni məhsul</a>
+								</div>
+							</div>
+							<div class="card-body">
+								<table class="table mt-3">
+									<thead>
+										<tr>
+											<th scope="col">No</th>
+											<th scope="col">Məhsul</th>
+											<th scope="col">Kateqoriya</th>
+											<th scope="col">Status</th>
+											<th scope="col">Əməliyyatlar</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model)
+										{
+											<tr>
+												<td>@(num = num + 1)</td>
+												<td>@item.Name</td>
+												<td>@item.CategoryId</td>
+												<td>
+													@if (item.Status)
+													{
+														<span style="color:lawngreen">Açıq</span>
+													}
+													else
+													{
+														<span style="color:darkred">Bloklanıb</span>
+													}
+												</td>
+
+												<td>
+													<a asp-controller="Product" asp-action="UpdateProduct" asp-route-Id="@item.Id" style="color:white" class="btn btn-primary">Yenilə</a>
+													<a asp-controller="Product" asp-action="DeleteProduct" asp-route-Id="@item.Id" style="color:white" class="btn btn-danger">Sil</a>
+												</td>
+											</tr>
+										}
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+

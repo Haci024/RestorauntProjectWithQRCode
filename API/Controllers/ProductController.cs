@@ -25,10 +25,16 @@ namespace API.Controllers
         [HttpGet("List")]
         public IActionResult ProductList()
         {
-          var values=_mapper.Map<List<ResultProductDTO>>(_service.GetList());
+          var values=_mapper.Map<IEnumerable<ResultProductDTO>>(_service.GetList());
             return Ok(values);    
         }
-        [HttpGet("GetById/{Id}")]
+		[HttpGet("ProductListWithCategory")]
+		public IActionResult ProductListWithCategory()
+		{
+			var values = _mapper.Map<IEnumerable<ResultProductDTO>>(_service.ProductListWithCategory());
+			return Ok(values);
+		}
+		[HttpGet("GetById/{Id}")]
         public IActionResult GetProduct(int Id)
         {
             var values = _mapper.Map<GetProductDTO>(_service.GetById(Id));
@@ -38,6 +44,7 @@ namespace API.Controllers
         public IActionResult CreateProduct(AddProductDTO dto)
         {
             var entity = new Products();
+            
             _mapper.Map(dto,entity);
             _service.Create(entity);
 

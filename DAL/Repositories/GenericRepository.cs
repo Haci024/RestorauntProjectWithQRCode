@@ -33,8 +33,9 @@ namespace DAL.Repositories
             return _context.Set<T>().Find(id);
         }
 
-        public List<T> GetList()
+        public IEnumerable<T> GetList()
         {
+
             return _context.Set<T>().ToList();
         }
 

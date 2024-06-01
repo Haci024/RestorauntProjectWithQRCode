@@ -32,7 +32,7 @@ namespace Business.Manager
            return _dal.GetById(id);
         }
 
-        public List<Reservation> GetList()
+        public IEnumerable<Reservation> GetList()
         {
             return _dal.GetList();
         }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO.DTOS.ProductDTO
+namespace UI.Areas.Admin.DTOS.ProductDTO
 {
-    public class AddProductDTO
+    public class ProductListDTO
     {
         public int Id { get; set; }
 
@@ -14,10 +14,16 @@ namespace DTO.DTOS.ProductDTO
 
         public int CategoryId { get; set; }
 
+        public decimal Price { get; set; }
+
+        public string CategoryName { get; set; }    
+
         public string description { get; set; }
 
         public string Image { get; set; }
 
-        public bool Status { get; set; } = true;
+        public bool Status { get; set; }
+
+
     }
 }

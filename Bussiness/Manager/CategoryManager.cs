@@ -33,7 +33,7 @@ namespace Business.Manager
             return _dal.GetById(id);
         }
 
-        public List<Category> GetList()
+        public IEnumerable<Category> GetList()
         {
             return _dal.GetList();
         }

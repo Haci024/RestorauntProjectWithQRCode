@@ -31,7 +31,7 @@ namespace Business.Manager
            return _dal.GetById(id);
         }
 
-        public List<Testimonial> GetList()
+        public IEnumerable<Testimonial> GetList()
         {
             return _dal.GetList();
         }

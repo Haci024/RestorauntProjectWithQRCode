@@ -10,5 +10,7 @@ namespace Business.Services
     public interface IProductService:IGenericService<Products>
     {
         public ICollection<Products> ProductListByCategory(int categoryId);
+
+        public ICollection<Products> ProductListWithCategory();
     }
 }

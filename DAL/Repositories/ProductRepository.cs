@@ -22,5 +22,10 @@ namespace DAL.Repositories
         {
             return _db.Products.Include(x=>x.Category).Where(x=>x.CategoryId==CategoryId && x.Status==true && x.Category.Status==true).ToList();
         }
-    }
+
+		public ICollection<Products> ProductListWithCategory()
+		{
+			return _db.Products.Include(x => x.Category).Where(x =>x.Status == true && x.Category.Status == true).ToList();
+		}
+	}
 }

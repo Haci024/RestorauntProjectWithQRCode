@@ -9,7 +9,7 @@ namespace API.AutoMapper
     {
         public ReservationMapper() {
         
-               CreateMap<Reservation,ResultReservationDTO>().ReverseMap();
+            CreateMap<Reservation,ResultReservationDTO>().ReverseMap();
             CreateMap<Reservation,UpdateReservationDTO>().ReverseMap();
             CreateMap<Reservation, GetReservationDTO>().ReverseMap();
             CreateMap<Reservation, AddReservationDTO>().ReverseMap();

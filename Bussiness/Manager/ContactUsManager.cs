@@ -33,7 +33,7 @@ namespace Business.Manager
             return _dal.GetById(id);
         }
 
-        public List<ContactUs> GetList()
+        public IEnumerable<ContactUs> GetList()
         {
            return _dal.GetList();
         }

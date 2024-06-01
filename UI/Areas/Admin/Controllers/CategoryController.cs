@@ -46,6 +46,7 @@ namespace UI.Areas.Admin.Controllers
 			if (response.IsSuccessStatusCode)
 			{
 
+
 				return RedirectToAction("CategoryList");
 			}
 			else

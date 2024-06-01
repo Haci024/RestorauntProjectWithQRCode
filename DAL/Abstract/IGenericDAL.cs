@@ -17,7 +17,7 @@ namespace DAL.Abstract
 
         T GetById(int id);
 
-        List<T> GetList();
+        IEnumerable<T> GetList();
 
 
     }

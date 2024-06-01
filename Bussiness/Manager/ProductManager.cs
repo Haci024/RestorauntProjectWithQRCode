@@ -31,7 +31,7 @@ namespace Business.Manager
             return _dal.GetById(id);    
         }
 
-        public List<Products> GetList()
+        public IEnumerable<Products> GetList()
         {
             return _dal.GetList();
         }
@@ -45,5 +45,10 @@ namespace Business.Manager
 
            return _dal.ProductListByCategory(categoryId);
         }
-    }
+
+		public ICollection<Products> ProductListWithCategory()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
